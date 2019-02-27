@@ -42,7 +42,7 @@ public class RateLimiterAspect {
         getRedisScript.setScriptSource(new ResourceScriptSource(new ClassPathResource("/lua/rateLimiter.lua")));
     }
 
-    @Pointcut("@annotation(com.aihuishou.ovc.notification.service.aspect.RateLimiter)")
+    @Pointcut("@annotation(per.yan.ding.aspect.RateLimiter)")
     public void rateLimiter() {
 
     }
