@@ -30,11 +30,11 @@ public interface IDingTalkApi {
 
     @ApiOperation("text消息 异步发送消息 消息会保存 消息结果以及相关内容需要使用searchMessageInfo()接口查询")
     @PostMapping("/send-text")
-    DataResponse sendText(@RequestBody DDTextMsgDTO ddTextMsgDTO);
+    DataResponse<String> sendText(@RequestBody DDTextMsgDTO ddTextMsgDTO);
 
     @ApiOperation("markdown消息 异步发送消息 消息会保存 消息结果以及相关内容需要使用searchMessageInfo()接口查询")
     @PostMapping("/send-markdown")
-    DataResponse sendMarkdown(@RequestBody DDMarkdownMsgDTO ddMarkdownMsgDTO);
+    DataResponse<String> sendMarkdown(@RequestBody DDMarkdownMsgDTO ddMarkdownMsgDTO);
 
     @ApiOperation("查询消息是否发送")
     @GetMapping("/search/{messageNo}")

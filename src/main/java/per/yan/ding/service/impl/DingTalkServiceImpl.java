@@ -48,12 +48,12 @@ public class DingTalkServiceImpl implements DingTalkService {
     }
 
     @Override
-    public DataResponse sendText(DDTextMsgDTO ddTextMsgDTO) {
+    public DataResponse<String> sendText(DDTextMsgDTO ddTextMsgDTO) {
         return saveAllInformation(ddTextMsgDTO);
     }
 
     @Override
-    public DataResponse sendMarkdown(DDMarkdownMsgDTO ddMarkdownMsgDTO) {
+    public DataResponse<String> sendMarkdown(DDMarkdownMsgDTO ddMarkdownMsgDTO) {
         return saveAllInformation(ddMarkdownMsgDTO);
     }
 
@@ -131,7 +131,7 @@ public class DingTalkServiceImpl implements DingTalkService {
         return getResultNow(DDMessageResultEnum.FAIL);
     }
 
-    private <T extends DDBaseMsgDTO> DataResponse saveAllInformation(T t) {
+    private <T extends DDBaseMsgDTO> DataResponse<String> saveAllInformation(T t) {
         String messageNo = NumProducerUtil.generateNumWithPrefix("M");
         //保存token，用于定时任务扫描 set结构
         //set名-固定字符 元素-token
@@ -152,7 +152,7 @@ public class DingTalkServiceImpl implements DingTalkService {
         //触发一次当前消息所有token的发送
         process(t.getTokens());
 
-        return new DataResponse();
+        return new DataResponse<>(messageNo);
     }
 
     private Map<String, DDMessageDO> prepareMap(Set<String> validMessageNoSet) {

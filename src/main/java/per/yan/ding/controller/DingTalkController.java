@@ -35,12 +35,12 @@ public class DingTalkController implements IDingTalkApi {
     }
 
     @Override
-    public DataResponse sendText(@RequestBody @Validated DDTextMsgDTO ddTextMsgDTO) {
+    public DataResponse<String> sendText(@RequestBody @Validated DDTextMsgDTO ddTextMsgDTO) {
         return service.sendText(ddTextMsgDTO);
     }
 
     @Override
-    public DataResponse sendMarkdown(@RequestBody @Validated DDMarkdownMsgDTO ddMarkdownMsgDTO) {
+    public DataResponse<String> sendMarkdown(@RequestBody @Validated DDMarkdownMsgDTO ddMarkdownMsgDTO) {
         return service.sendMarkdown(ddMarkdownMsgDTO);
     }
 

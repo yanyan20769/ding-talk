@@ -15,9 +15,9 @@ public interface DingTalkService {
 
     DataResponse sendMarkdownImmediately(DDMarkdownMsgDTO ddMarkdownMsgDTO);
 
-    DataResponse sendText(DDTextMsgDTO ddTextMsgDTO);
+    DataResponse<String> sendText(DDTextMsgDTO ddTextMsgDTO);
 
-    DataResponse sendMarkdown(DDMarkdownMsgDTO ddMarkdownMsgDTO);
+    DataResponse<String> sendMarkdown(DDMarkdownMsgDTO ddMarkdownMsgDTO);
 
     DataResponse<DDMessageVO> searchMessageInfo(String messageNo);
 
