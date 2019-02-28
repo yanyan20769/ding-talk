@@ -200,25 +200,29 @@ public class DingTalkServiceImpl implements DingTalkService {
 
     private DataResponse<DDMessageResultEnum> handleResult(Set<DDMessageResultEnum> itemResults, boolean sendAll) {
         if (CollectionUtils.isNotEmpty(itemResults)) {
-            if (sendAll) {
-                if (itemResults.stream().allMatch(r -> DDMessageResultEnum.SUCCESS == r)) {
-                    return getResultNow(DDMessageResultEnum.SUCCESS);
-                } else if (itemResults.stream().allMatch(r -> DDMessageResultEnum.RATE_LIMIT == r)) {
-                    return getResultNow(DDMessageResultEnum.RATE_LIMIT);
-                } else {
-                    return getResultNow(DDMessageResultEnum.FAIL);
-                }
-            } else {
-                if (itemResults.stream().anyMatch(r -> DDMessageResultEnum.SUCCESS == r)) {
-                    return getResultNow(DDMessageResultEnum.SUCCESS);
-                } else if (itemResults.stream().anyMatch(r -> DDMessageResultEnum.FAIL == r)) {
-                    return getResultNow(DDMessageResultEnum.FAIL);
-                } else {
-                    return getResultNow(DDMessageResultEnum.RATE_LIMIT);
-                }
-            }
+            return sendAll ? handleSendAllResult(itemResults) : handleSendAnyResult(itemResults);
         }
         return getResultNow(DDMessageResultEnum.FAIL);
+    }
+
+    private DataResponse<DDMessageResultEnum> handleSendAllResult(Set<DDMessageResultEnum> itemResults) {
+        if (itemResults.stream().allMatch(r -> DDMessageResultEnum.SUCCESS == r)) {
+            return getResultNow(DDMessageResultEnum.SUCCESS);
+        } else if (itemResults.stream().allMatch(r -> DDMessageResultEnum.RATE_LIMIT == r)) {
+            return getResultNow(DDMessageResultEnum.RATE_LIMIT);
+        } else {
+            return getResultNow(DDMessageResultEnum.FAIL);
+        }
+    }
+
+    private DataResponse<DDMessageResultEnum> handleSendAnyResult(Set<DDMessageResultEnum> itemResults) {
+        if (itemResults.stream().anyMatch(r -> DDMessageResultEnum.SUCCESS == r)) {
+            return getResultNow(DDMessageResultEnum.SUCCESS);
+        } else if (itemResults.stream().anyMatch(r -> DDMessageResultEnum.FAIL == r)) {
+            return getResultNow(DDMessageResultEnum.FAIL);
+        } else {
+            return getResultNow(DDMessageResultEnum.RATE_LIMIT);
+        }
     }
 
     private DataResponse<DDMessageResultEnum> getResultNow(DDMessageResultEnum resultEnum) {
