@@ -11,7 +11,7 @@ import per.yan.ding.model.DDResponse;
  * @author gaoyan
  * @date 2018/11/5 20:58
  */
-@FeignClient(name = "dingTalkClient", url = "#{'${dingtalk.robot.address}'}")
+@FeignClient(name = "dingTalkClient", url = "#{'${ding.robot.address}'}")
 @RequestMapping("/robot")
 public interface DingTalkClient {
 

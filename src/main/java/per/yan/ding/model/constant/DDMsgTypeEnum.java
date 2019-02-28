@@ -16,6 +16,7 @@ import lombok.Getter;
 public enum DDMsgTypeEnum {
     /**
      * 钉钉消息类型
+     * 当前只实现了text和markdown两种
      */
     @ApiModelProperty("文本")
     TEXT("text"),

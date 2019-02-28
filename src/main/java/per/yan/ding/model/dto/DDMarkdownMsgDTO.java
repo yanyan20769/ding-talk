@@ -28,11 +28,11 @@ import java.util.Set;
 public class DDMarkdownMsgDTO extends DDBaseMsgDTO {
 
     @ApiModelProperty("首屏会话透出的展示内容")
-    @NotBlank(message = "")
+    @NotBlank(message = "title不能为空")
     private String title;
 
     @ApiModelProperty("消息内容 格式可以通过DDMarkdownMsgTextUtil类设置")
-    @NotBlank(message = "")
+    @NotBlank(message = "内容不能为空")
     private String text;
 
     @ApiModelProperty("是否@所有人")

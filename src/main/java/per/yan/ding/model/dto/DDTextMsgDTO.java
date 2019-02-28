@@ -24,7 +24,7 @@ import java.util.Set;
 public class DDTextMsgDTO extends DDBaseMsgDTO {
 
     @ApiModelProperty("消息内容")
-    @NotBlank(message = "消息内容不能为空")
+    @NotBlank(message = "内容不能为空")
     private String content;
 
     @ApiModelProperty("是否@所有人")

@@ -29,7 +29,7 @@ public abstract class DDBaseMsgDTO {
     @ApiModelProperty("机器人token列表")
     @NotEmpty(message = "机器人列表不能为空")
     private Set<String> tokens;
-    @ApiModelProperty("是否需要所有机器人发送该消息 空等同false")
+    @ApiModelProperty("是否需要所有机器人发送该消息 null==false")
     private Boolean sendAll;
     @ApiModelProperty("消息产生时间")
     private Date createdTime;
@@ -41,7 +41,7 @@ public abstract class DDBaseMsgDTO {
     public abstract String toJsonString();
 
     /**
-     * 优先级为 HIGHER的消息需要在消息内容前加上 时间、环境、工程等信息
+     * 所有消息需要在消息内容前加上 时间、环境、工程等信息
      */
     String appendPrefix() {
         StringBuilder sb = new StringBuilder();
