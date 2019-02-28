@@ -74,7 +74,7 @@ public class DingTalkSendHandler {
         if (isNotRateLimit(response)) {
             //更新每条messageNo-token对应的发送状态
             updateItemStatus(assembleItemMessageDO(m.getMessageNo(), token, response));
-            m.setResult(assembleResult(response));
+            appendResult(m, response);
             if (response.getErrcode() == DDMessageResultEnum.SUCCESS.getCode()
                     && sendAll && !hasSentAll(m.getMessageNo())) {
                 //子消息发送成功时，发送所有机器人但还有机器人未发送的消息本次不更改主消息状态
@@ -105,11 +105,9 @@ public class DingTalkSendHandler {
         return item;
     }
 
-    private DDMessageDO.Result assembleResult(DDResponse response) {
-        DDMessageDO.Result result = new DDMessageDO.Result();
-        result.setResultCode(response.getErrcode());
-        result.setResultMsg(response.getErrmsg());
-        return result;
+    private void appendResult(DDMessageDO m, DDResponse response) {
+        m.setResultCode(response.getErrcode());
+        m.setResultMsg(response.getErrmsg());
     }
 
     private boolean hasSentAll(String messageNo) {

@@ -43,7 +43,7 @@ public abstract class DDBaseMsgDTO {
     /**
      * 优先级为 HIGHER的消息需要在消息内容前加上 时间、环境、工程等信息
      */
-    protected String appendPrefix() {
+    String appendPrefix() {
         StringBuilder sb = new StringBuilder();
         if (this.getCreatedTime() != null) {
             String dateStr = new SimpleDateFormat("MM-dd HH:mm:ss").format(this.getCreatedTime());

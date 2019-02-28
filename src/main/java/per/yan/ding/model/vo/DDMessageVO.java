@@ -25,15 +25,8 @@ public class DDMessageVO {
 
     private String content;
 
-    private Result result;
+    private Integer resultCode;
 
-    @Data
-    @Builder
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Result {
-        private Integer resultCode;
-        private String resultMsg;
-    }
+    private String resultMsg;
 
 }

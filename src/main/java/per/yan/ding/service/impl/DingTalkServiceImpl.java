@@ -90,15 +90,14 @@ public class DingTalkServiceImpl implements DingTalkService {
                             }
                     );
             //将所有的message内容一次性查出，再根据token所需要的message内容分发到每个token对应的异步线程
-            Map<String, DDMessageDO> messageInfoMap = prepareMap(validMessageNoSet);
+            Map<String, DDMessageDO> messageInfoMap = prepareData(validMessageNoSet);
             if (MapUtils.isNotEmpty(validTokenMap) && MapUtils.isNotEmpty(messageInfoMap)) {
-                Map<String, DDMessageDO> finalMessageInfoMap = messageInfoMap;
                 validTokenMap.keySet()
                         .stream()
                         .filter(k -> null != k && !StringUtils.isEmpty(validTokenMap.get(k)))
                         .forEach(k -> {
                                     //每个token对应的待发message内容
-                                    DDMessageDO messageDO = finalMessageInfoMap.get(validTokenMap.get(k));
+                                    DDMessageDO messageDO = messageInfoMap.get(validTokenMap.get(k));
                                     //每个token使用一个异步线程发送
                                     if (null != messageDO) {
                                         handler.sendMessageAsync(k, messageDO);
@@ -155,7 +154,7 @@ public class DingTalkServiceImpl implements DingTalkService {
         return new DataResponse<>(messageNo);
     }
 
-    private Map<String, DDMessageDO> prepareMap(Set<String> validMessageNoSet) {
+    private Map<String, DDMessageDO> prepareData(Set<String> validMessageNoSet) {
         List<DDMessageDO> messageDOList = handler.batchQueryMessageDO(validMessageNoSet);
         //key-messageNo v-message内容
         Map<String, DDMessageDO> messageInfoMap = null;

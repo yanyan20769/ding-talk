@@ -13,9 +13,9 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 @Configuration
 public class ThreadPoolConfig {
 
-    @Value("${thread.pool.core-pool-size:20}")
+    @Value("${thread.pool.core-pool-size:5}")
     private Integer corePoolSize;
-    @Value("${thread.pool.max-pool-size:100}")
+    @Value("${thread.pool.max-pool-size:30}")
     private Integer maxPoolSize;
     @Value("${thread.pool.queue-capacity:3000}")
     private Integer queueCapacity;

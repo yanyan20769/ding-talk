@@ -26,19 +26,13 @@ public class DDMessageDO implements Serializable {
 
     private String content;
 
-    private Result result;
+    /**
+     * 发送结果
+     */
+    private Integer resultCode;
+    /**
+     * 结果描述
+     */
+    private String resultMsg;
 
-    @Data
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class Result implements Serializable {
-        /**
-         * 发送结果
-         */
-        private Integer resultCode;
-        /**
-         * 结果描述
-         */
-        private String resultMsg;
-    }
 }
