@@ -1,6 +1,5 @@
 package per.yan.ding.config;
 
-import com.aihuishou.helper.distribute.redis.RedisDistributeLockHelper;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -14,6 +13,7 @@ import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
+import per.yan.ding.util.lock.RedisDistributeLockHelper;
 
 import java.nio.charset.StandardCharsets;
 

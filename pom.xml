@@ -41,11 +41,6 @@
             <version>1.8.14.RELEASE</version>
         </dependency>
         <dependency>
-            <groupId>com.aihuishou</groupId>
-            <artifactId>helper.distributelock</artifactId>
-            <version>1.1.1</version>
-        </dependency>
-        <dependency>
             <groupId>io.swagger</groupId>
             <artifactId>swagger-annotations</artifactId>
             <version>1.5.14</version>
