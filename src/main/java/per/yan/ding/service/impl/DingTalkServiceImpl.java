@@ -19,11 +19,7 @@ import per.yan.ding.model.vo.DataResponse;
 import per.yan.ding.service.DingTalkService;
 import per.yan.ding.util.NumProducerUtil;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -146,7 +142,12 @@ public class DingTalkServiceImpl implements DingTalkService {
 
         //保存messageNo与token对应的发送状态 hash结构
         //hash名-messageNo key-token value-DDItemMessageDO
-        handler.saveAllItems(t.getTokens().stream().map(token -> assembleItemMessageDO(messageNo, token)).collect(Collectors.toList()));
+
+        handler.saveAllItems(t.getTokens()
+                .stream()
+                .map(token -> assembleItemMessageDO(messageNo, token))
+                .collect(Collectors.toList())
+        );
 
         //触发一次当前消息所有token的发送
         process(t.getTokens());
@@ -159,7 +160,9 @@ public class DingTalkServiceImpl implements DingTalkService {
         //key-messageNo v-message内容
         Map<String, DDMessageDO> messageInfoMap = null;
         if (CollectionUtils.isNotEmpty(messageDOList)) {
-            messageInfoMap = messageDOList.stream().collect(Collectors.toMap(DDMessageDO::getMessageNo, v -> v, (first, second) -> first));
+            messageInfoMap = messageDOList
+                    .stream()
+                    .collect(Collectors.toMap(DDMessageDO::getMessageNo, v -> v, (first, second) -> first));
         }
         return messageInfoMap;
     }
@@ -170,21 +173,12 @@ public class DingTalkServiceImpl implements DingTalkService {
     }
 
     private <T extends DDBaseMsgDTO> DDMessageDO assembleMessageDO(String messageNo, T t) {
-        return DDMessageDO
-                .builder()
-                .messageNo(messageNo)
-                .msgLevel(t.getMsgLevel())
-                .sendAll(t.getSendAll())
-                .content(t.toJsonString())
-                .build();
+        return DDMessageDO.builder().messageNo(messageNo)
+                .msgLevel(t.getMsgLevel()).sendAll(t.getSendAll()).content(t.toJsonString()).build();
     }
 
     private DDItemMessageDO assembleItemMessageDO(String messageNo, String token) {
-        return DDItemMessageDO
-                .builder()
-                .messageNo(messageNo)
-                .token(token)
-                .build();
+        return DDItemMessageDO.builder().messageNo(messageNo).token(token).build();
     }
 
     private DDMessageResultEnum assembleResult(DDResponse response) {

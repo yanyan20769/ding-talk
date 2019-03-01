@@ -152,7 +152,8 @@ public class DingTalkSendHandler {
 
     public void saveAllItems(List<DDItemMessageDO> itemList) {
         if (CollectionUtils.isNotEmpty(itemList)) {
-            Map<String, DDItemMessageDO> itemMap = itemList.stream().collect(Collectors.toMap(DDItemMessageDO::getToken, v -> v, (first, second) -> first));
+            Map<String, DDItemMessageDO> itemMap = itemList.stream()
+                    .collect(Collectors.toMap(DDItemMessageDO::getToken, v -> v, (first, second) -> first));
             String hashName = getItemContentHash(itemList.get(0).getMessageNo());
             redisTemplate.opsForHash().putAll(hashName, itemMap);
         }
