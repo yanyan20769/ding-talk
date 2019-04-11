@@ -40,7 +40,7 @@ public interface IDingTalkApi {
     @GetMapping("/search/{messageNo}")
     DataResponse<DDMessageVO> searchMessageInfo(@PathVariable("messageNo") String messageNo);
 
-    @ApiOperation("定时任务调用接口 参数为每次调用 每个token下取几条消息")
+    @ApiOperation("定时任务调用接口")
     @PostMapping("/task/send")
     DataResponse executeMessageSendTask();
 }
