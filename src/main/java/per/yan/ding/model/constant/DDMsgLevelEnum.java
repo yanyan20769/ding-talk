@@ -9,9 +9,10 @@ import lombok.Getter;
  * @author gaoyan
  * @date 2019/2/20 13:57
  */
+@ApiModel("消息级别")
+
 @Getter
 @AllArgsConstructor
-@ApiModel("消息级别")
 public enum DDMsgLevelEnum {
     /**
      * 消息级别

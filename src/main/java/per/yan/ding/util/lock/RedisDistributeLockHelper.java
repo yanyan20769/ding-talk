@@ -1,5 +1,7 @@
 package per.yan.ding.util.lock;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
 
@@ -9,6 +11,8 @@ import java.util.concurrent.TimeUnit;
  * @author gaoyan
  * @date 2019/2/26 19:56
  */
+@Getter
+@Setter
 public class RedisDistributeLockHelper implements DistributeLockHelper {
     private String applicationCode;
     private Integer maxLockTimeSeconds = 60;
@@ -16,30 +20,6 @@ public class RedisDistributeLockHelper implements DistributeLockHelper {
 
     public RedisDistributeLockHelper(String applicationCode, StringRedisTemplate redisTemplate) {
         this.applicationCode = applicationCode;
-        this.redisTemplate = redisTemplate;
-    }
-
-    public String getApplicationCode() {
-        return this.applicationCode;
-    }
-
-    public void setApplicationCode(String applicationCode) {
-        this.applicationCode = applicationCode;
-    }
-
-    public Integer getMaxLockTimeSeconds() {
-        return this.maxLockTimeSeconds;
-    }
-
-    public void setMaxLockTimeSeconds(Integer maxLockTimeSeconds) {
-        this.maxLockTimeSeconds = maxLockTimeSeconds;
-    }
-
-    public StringRedisTemplate getRedisTemplate() {
-        return this.redisTemplate;
-    }
-
-    public void setRedisTemplate(StringRedisTemplate redisTemplate) {
         this.redisTemplate = redisTemplate;
     }
 
