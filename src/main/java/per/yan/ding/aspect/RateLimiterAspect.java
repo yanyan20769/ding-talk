@@ -70,13 +70,7 @@ public class RateLimiterAspect {
             log.info("触发限流 msg:{}", msg);
             return false;
         }
-        boolean result = false;
-        try {
-            result = (boolean) jp.proceed();
-        } catch (Throwable throwable) {
-            log.error("限流方法执行失败！message: {}", throwable);
-        }
-        return result;
+        return true;
     }
 
     private String getRateLimiterKey(String token) {
